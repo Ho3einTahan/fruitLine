@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -43,7 +42,7 @@ class _MapScreenState extends State<MapScreen> {
               children: [
                 TileLayer(
                   urlTemplate:
-                  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                   subdomains: const ['a', 'b', 'c'],
                 ),
                 MarkerLayer(
@@ -53,7 +52,7 @@ class _MapScreenState extends State<MapScreen> {
                       height: 80.0,
                       point: LatLng(latLng.latitude, latLng.longitude),
                       child: Container(
-                        child: Icon(
+                        child: const Icon(
                           Icons.location_on,
                           color: Colors.red,
                           size: 50.0,
