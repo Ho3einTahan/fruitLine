@@ -19,17 +19,20 @@ class CartAdapter extends TypeAdapter<Cart> {
     return Cart(
       count: fields[0] as double,
       fruitName: fields[1] as String,
+      imageAddress: fields[2] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, Cart obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(3)
       ..writeByte(0)
       ..write(obj.count)
       ..writeByte(1)
-      ..write(obj.fruitName);
+      ..write(obj.fruitName)
+      ..writeByte(2)
+      ..write(obj.imageAddress);
   }
 
   @override
