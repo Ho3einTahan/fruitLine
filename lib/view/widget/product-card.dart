@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:persian_number_utility/persian_number_utility.dart';
 
 import '../../core/const/appColor.dart';
 
 Widget buildProductCardItem({required String imagePath, required String productName, required double price}) {
-  final priceController = MoneyMaskedTextController(
-    decimalSeparator: '',
-    thousandSeparator: '.',
-    initialValue: price,
-  );
-
   return Container(
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(16),
@@ -27,15 +21,14 @@ Widget buildProductCardItem({required String imagePath, required String productN
                 child: Image.asset('images/$imagePath.png', width: 110, height: 100),
               ),
               const Padding(
-                padding: const EdgeInsets.only(right: 16),
-                child: Align(alignment: Alignment.centerRight, child: Text('نارگیل', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold))),
+                padding: EdgeInsets.only(right: 16),
+                child: Align(alignment: Alignment.centerRight, child: Text('نارگیل', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold))),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 8, right: 16, bottom: 24),
                 child: Align(
                     alignment: Alignment.centerRight,
-                    child: Text(double.parse(priceController.text).toStringAsFixed(3),
-                        style: const TextStyle(fontSize: 16, color: AppColor.priceRed, fontWeight: FontWeight.bold))),
+                    child: Text(price.toString().extractNumber().seRagham(separator: ','), style: const TextStyle(fontSize: 16, color: AppColor.priceRed, fontWeight: FontWeight.bold))),
               ),
             ],
           ),
