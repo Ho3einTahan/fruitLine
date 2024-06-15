@@ -6,17 +6,16 @@ Widget headerBuilder({required String title}) {
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
     child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        _buildHeaderButton(search: false),
+        _buildHeaderButton(),
+        const SizedBox(width: 110),
         Text(title, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-        _buildHeaderButton(search: true),
       ],
     ),
   );
 }
 
-Widget _buildHeaderButton({required bool search}) {
+Widget _buildHeaderButton() {
   return Container(
     height: 55,
     width: 55,
@@ -25,6 +24,6 @@ Widget _buildHeaderButton({required bool search}) {
       border: Border.all(color: AppColor.headerButtonStroke, width: 1),
       borderRadius: BorderRadius.circular(32),
     ),
-    child: Center(child: FaIcon(search == false ? Icons.arrow_back_ios_new_outlined : FontAwesomeIcons.search)),
+    child: const Center(child: FaIcon(Icons.arrow_back_ios_new_outlined)),
   );
 }
