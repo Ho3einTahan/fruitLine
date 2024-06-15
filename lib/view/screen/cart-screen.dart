@@ -68,7 +68,7 @@ class _CartScreenState extends State<CartScreen> {
           CachedNetworkImage(
             imageUrl: imgAddress,
             height: 70,
-            placeholder: (context, url) => const CircularProgressIndicator(),
+            placeholder: (context, url) => const SizedBox(width: 50, height: 50, child: Center(child: CircularProgressIndicator())),
             errorWidget: (context, url, error) => const Icon(Icons.error),
           ),
           Column(
