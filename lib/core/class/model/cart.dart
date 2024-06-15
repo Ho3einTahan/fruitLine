@@ -13,9 +13,13 @@ class Cart extends HiveObject {
   String fruitName;
 
   @HiveField(2)
+  // price
+  double price;
+
+  @HiveField(3)
   // image Address of Fruit
   // example    http:// .... /img.png
   String imageAddress;
 
-  Cart({required this.count, required this.fruitName,required this.imageAddress});
+  Cart({required this.count, required this.fruitName, required this.imageAddress, required this.price});
 }
