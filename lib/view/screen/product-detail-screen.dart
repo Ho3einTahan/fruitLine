@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fruitline/core/class/model/cart.dart';
+import 'package:fruitline/view/screen/cart-screen.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:input_quantity/input_quantity.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
@@ -62,35 +63,7 @@ class _ProductDetail_ScreenState extends State<ProductDetail_Screen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(productName),
-              InputQty(
-                maxVal: 100,
-                initVal: 1,
-                minVal: 1,
-                steps: 1,
-                validator: (value) {
-                  List<String> numberList = value.toString().split('');
-                  String weight = convertNumberToWeight_Kg(numberList: numberList);
-                  return weight;
-                },
-                decoration: QtyDecorationProps(
-                  border: InputBorder.none,
-                  plusBtn: Container(
-                    height: 40,
-                    width: 40,
-                    decoration: BoxDecoration(color: AppColor.primaryGreen, borderRadius: BorderRadius.circular(24)),
-                    child: const Center(child: FaIcon(FontAwesomeIcons.plus, color: AppColor.lightWhite)),
-                  ),
-                  minusBtn: Container(
-                    height: 40,
-                    width: 40,
-                    decoration: BoxDecoration(
-                      color: AppColor.cardGrey,
-                      borderRadius: BorderRadius.circular(24),
-                    ),
-                    child: const Center(child: FaIcon(FontAwesomeIcons.minus, color: Colors.grey)),
-                  ),
-                ),
-              ),
+              _buildAdd_MinusProductCounterButton(),
             ],
           ),
           const SizedBox(height: 6),
@@ -148,9 +121,11 @@ class _ProductDetail_ScreenState extends State<ProductDetail_Screen> {
   Widget _buildAddToCart() {
     return GestureDetector(
       onTap: () {
-        // cartBox.add(Cart(count: 1, fruitName: 'موز', imageAddress: '1384'));
+        cartBox.add(
+            Cart(count: 2, fruitName: 'موز', imageAddress: 'https://www.themilefarmshop.co.uk/images/shop/more/951x951_730_075614eaaa14db6aadebfffc27f74c70_1597321310redpepper.jpg', price: 25000));
         // Cart? cartInstance = cartBox.get(1);
         // print(cartInstance?.fruitName);
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => CartScreen()));
       },
       child: Container(
         width: double.infinity,
@@ -164,6 +139,38 @@ class _ProductDetail_ScreenState extends State<ProductDetail_Screen> {
           'افزودن به سبد',
           style: TextStyle(color: AppColor.lightWhite, fontSize: 24, fontWeight: FontWeight.w800),
         )),
+      ),
+    );
+  }
+
+  Widget _buildAdd_MinusProductCounterButton() {
+    return InputQty(
+      maxVal: 100,
+      initVal: 1,
+      minVal: 1,
+      steps: 1,
+      validator: (value) {
+        List<String> numberList = value.toString().split('');
+        String weight = convertNumberToWeight_Kg(numberList: numberList);
+        return weight;
+      },
+      decoration: QtyDecorationProps(
+        border: InputBorder.none,
+        plusBtn: Container(
+          height: 40,
+          width: 40,
+          decoration: BoxDecoration(color: AppColor.primaryGreen, borderRadius: BorderRadius.circular(24)),
+          child: const Center(child: FaIcon(FontAwesomeIcons.plus, color: AppColor.lightWhite)),
+        ),
+        minusBtn: Container(
+          height: 40,
+          width: 40,
+          decoration: BoxDecoration(
+            color: AppColor.cardGrey,
+            borderRadius: BorderRadius.circular(24),
+          ),
+          child: const Center(child: FaIcon(FontAwesomeIcons.minus, color: Colors.grey)),
+        ),
       ),
     );
   }
